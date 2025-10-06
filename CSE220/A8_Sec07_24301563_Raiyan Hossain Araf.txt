@@ -1,0 +1,280 @@
+								TASK 3
+
+
+
+import java.util.Scanner;
+
+public class Task3{
+    public static void main(String[] args) {
+
+
+        System.out.println("How many numbers do you want?");
+        Scanner sc = new Scanner(System.in);
+        int k = sc.nextInt();
+        System.out.println("How many numbers do you want in your array?");
+        int m = sc.nextInt();
+        int[] arr1 = new int[m];
+
+
+        for(int i = 0; i < m; i++){
+
+            System.out.println("Enter number "+(i+1)+": ");
+            arr1[i] = sc.nextInt();
+
+        }
+
+
+        int[] arr2 = taskmanagement(arr1,k);
+
+
+        for(int i = 0; i < k; i++){
+            if(i==0){
+                System.out.print("[ ");
+            }
+            if(i!=k-1) {
+                System.out.print(arr2[i] + ", ");
+            }
+            else{
+                System.out.print(arr2[i]+" ]");
+            }
+        }
+
+
+    }
+
+    public static int[] taskmanagement(int[] arr1, int k){
+
+        int[] rslt = new int[k];
+        int size =0;
+
+        for(int i = 0; i <k; i++){
+
+            size=insert(rslt,0,size);
+
+        }
+        for(int task : arr1){
+
+            int cl= remove(rslt,size);
+            size--;
+
+            int ul=cl+task;
+            size=insert(rslt,ul,size);
+
+
+        }
+
+        int[] rslt2 = new int[k];
+
+        for (int i = 0; i < k; i++){
+
+            rslt2[i] = remove(rslt, size);
+            size--;
+
+
+        }
+
+
+        return rslt2;
+
+    }
+
+   
+
+    private static void heap(int[] arr1,int m,int i){
+
+        int lowest = i;
+        int left= 2*i+1;
+        int right =2*i+2;
+
+        if(left<m &&arr1[left]< arr1[lowest]){
+
+            lowest = left;
+
+        }
+
+        if(right<m&& arr1[right] <arr1[lowest]){
+
+            lowest = right;
+
+        }
+
+        if(lowest!= i){
+
+            int temp = arr1[i];
+
+            arr1[i] = arr1[lowest];
+            arr1[lowest] = temp;
+
+            heap(arr1,m,lowest);
+
+
+        }
+    }
+
+    private static int insert(int[] arr1,int k, int size){
+
+        if(size==arr1.length){
+
+            return size;
+
+        }
+
+        arr1[size] =k;
+
+        int i =size;
+
+        while(i>0){
+
+            int parent = (i-1)/2;
+
+            if(arr1[parent]>arr1[i]){
+
+                int temp = arr1[parent];
+                 arr1[parent] = arr1[i];
+
+                 arr1[i] = temp;
+                i =parent;
+
+
+            }
+            else{
+
+                break;
+
+            }
+        }
+
+                return size+1;
+    }
+
+    private static int remove(int[]arr, int size){
+
+
+        if(size<=0){
+
+            return 0;
+
+        }
+
+        int root = arr[0];
+        arr[0] = arr[size-1];
+
+        heap(arr,size-1,0);
+
+        return root;
+
+
+    }
+}
+
+
+
+
+								TASK 4
+
+
+import java.util.Scanner;
+public class Task4 {
+    public static void main(String[] args){
+
+       System.out.println("How many numbers do you want?");
+       Scanner sc = new Scanner(System.in);
+       int k = sc.nextInt();
+       System.out.println("How many numbers do you want in your array?");
+       int m = sc.nextInt();
+       int[] arr1 = new int[m];
+
+       for(int i = 0; i < m; i++){
+           System.out.println("Enter number "+(i+1)+": ");
+           arr1[i] = sc.nextInt();
+       }
+
+       
+
+       createMaxHeap( m, arr1);
+
+       for(int i = 0; i < k; i++){
+
+           if(i==0){
+
+               System.out.print("[ ");
+
+           }
+
+           if(i<k-1) {
+               System.out.print(remove(arr1, m)+", ");
+           }
+
+           else{
+
+               System.out.print(remove(arr1, m)+" ]");
+
+           }
+
+       }
+
+
+
+    }
+
+    private static void createMaxHeap(int m,int[] arr1){
+
+        for(int i=m/2-1;i>=0;i--){
+
+            heap(arr1,m,i);
+
+        }
+
+
+    }
+
+    private static void heap(int[] arr1,int m,int i){
+
+        int largest = i;
+        int left= 2*i+1;
+         int right =2*i+2;
+
+        if(left<m &&arr1[left]> arr1[largest]){
+
+            largest = left;
+
+        }
+
+        if(right<m&& arr1[right] >arr1[largest]){
+
+             largest = right;
+
+        }
+
+        if(largest!= i){
+
+             int temp = arr1[i];
+             
+            arr1[i] = arr1[largest];
+            arr1[largest] = temp;
+
+            heap(arr1,m,largest);
+
+
+        }
+    }
+
+    private static int remove(int[]arr, int size){
+
+
+        if(size<=0){
+
+        return 0;
+
+        }
+
+        int root = arr[0];
+        arr[0] = arr[size-1];
+
+        heap(arr,size-1,0);
+
+        return root;
+
+
+    }
+}

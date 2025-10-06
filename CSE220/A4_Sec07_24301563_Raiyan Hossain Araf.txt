@@ -1,0 +1,134 @@
+                                                                 TASK 1
+
+ private int hashFunction( Integer key ){
+        // TO DO
+        int r =(key+3)%6;
+       return r;
+    }
+
+
+	//you need to COMPLETE this method and MUST SUBMIT IT
+    //before writing remove you should complete hashFunction
+    public void remove( Integer key ){
+        // TO DO
+
+        int idx =hashFunction(key);
+
+        if(idx==-1||ht[idx]==null ) {
+
+            return;
+
+        }
+
+        PairNode c = ht[idx];
+
+        if(c.key.equals(key)) {
+
+            ht[idx] = c.next;
+            return;
+
+        }
+
+        PairNode p = c;
+        c = c.next;
+
+        while (c!=null) {
+
+            if (c.key.equals(key)) {
+
+
+
+                    p.next = c.next;
+                    return;
+
+
+
+            }
+
+            p = c;
+            c = c.next;
+
+        }
+
+    }
+
+}
+
+								TASK 2
+ public static int diamondCount(Stack stack, String str) {
+        // To Do
+        int rslt=0;
+
+
+        for(int i=0; i<str.length(); i++) {
+
+            char ch = str.charAt(i);
+
+            if(ch=='<') {
+
+                stack.push(ch);
+            }
+
+            else if(ch=='>') {
+
+                if(!stack.isEmpty()&&stack.peek().equals('<')) {
+
+                    stack.pop();
+                    rslt++;
+
+                }
+
+            }
+
+        }
+
+
+
+        return rslt;
+    }
+
+
+								TASK 3
+
+
+
+
+ public static String removeConsecDups(String word){
+	// TODO
+
+       LinkedListQueue queue = new LinkedListQueue();
+
+
+        for(int i = 0; i < word.length(); i++){
+
+            char ch = word.charAt(i);
+
+            queue.enqueue(ch);
+
+        }
+
+        char s = (char)queue.dequeue();
+        String res ="";
+        res += s;
+
+        while(!queue.isEmpty()){
+
+            char curr = (char)queue.peek();
+
+            if (curr == s){
+
+                queue.dequeue();
+
+            }
+
+            else {
+               char temp = (char)queue.dequeue();
+                res+=temp;
+                s=temp;
+
+            }
+
+        }
+
+		return res;    
+}

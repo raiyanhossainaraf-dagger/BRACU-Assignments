@@ -1,0 +1,174 @@
+							Task 1
+//Assignment Task 01: Container with Most Water
+
+        int maxArea = 0;
+        int l=0;
+        int r=height.length-1;
+        while(l<r){
+           int w=r-l;
+           int h;
+           if(height[l]>height[r]){
+               h=height[r];
+           }
+           else{
+
+               h=height[l];
+           }
+           maxArea=Math.max(maxArea,w*h);
+
+           if(height[l]<height[r]){
+               l+=1;
+
+           }
+           else {
+               r-=1;
+           }
+
+        }
+
+
+        System.out.println(maxArea);
+
+    }
+
+							Task 2
+
+    public static Integer rowRotation( Integer examWeek, String[][] matrix ){
+
+        //TO DO
+        int cp=0;
+        for(int i = 0; i < matrix.length; i++){
+            for(int j = 0; j < matrix[i].length; j++){
+                if(matrix[i][j].equals("AA")){
+
+                    cp = i;
+                    break;
+                }
+
+            }
+        }
+        for(int i = 1; i < examWeek; i++){
+
+            if(cp<matrix.length-1){
+
+                cp++;
+
+            }
+            else if(cp == matrix.length-1){
+
+                cp = 1;
+
+            }
+
+        }
+
+
+
+        for (int j = 1; j < examWeek;j++) {
+
+            String[] temp = matrix[matrix.length-1];
+
+            for (int i = matrix.length - 1; i > 0;i--) {
+
+                matrix[i] = matrix[i-1];
+            }
+            matrix[0] = temp;
+        }
+
+        for(int i = 0; i < matrix.length; i++){
+
+
+            for(int j = 0; j < matrix[i].length; j++){
+
+                System.out.print( "|  " + matrix[i][j] + "  ");
+            }
+
+            System.out.println("|");
+        }
+
+        return cp;
+
+
+
+    }
+
+
+
+
+							Task 3
+        public static Integer[][] compressMatrix( Integer[][] matrix ){
+
+            //For this task you'll need to create new 2D array
+
+            //TO DO
+            Integer[][] SUM = new Integer[matrix.length/2][matrix[0].length/2];
+
+
+            for(int i = 0; i < matrix.length; i+=2){
+
+                for(int j = 0; j < matrix[i].length; j+=2){
+                   
+                       int sum = matrix[i][j]+matrix[i][j+1]+matrix[i+1][j]+matrix[i+1][j+1];
+                        SUM[i/2][j/2] = sum;
+
+
+
+
+                }
+            }
+
+            //remove the line below and return the newly created Compressed 2D matrix
+            return SUM;
+        }
+
+							Task 4
+
+
+    public static void playGame( Integer[][] arena ){
+
+        //For this task you don't need to create any new 2D array
+        //just print the result inside the function
+
+        //TO DO
+        int c =0;
+        for ( int i = 0; i < arena.length; i++ ){
+
+            for ( int j = 0; j < arena[i].length; j++ ) {
+
+                if (arena[i][j] / 50 > 0) {
+
+                    if ( i < arena.length-1 && arena[i + 1][j] == 2) {
+
+                        c++;
+
+                    }
+
+                    if ( j < arena.length-1 && arena[i][j + 1] == 2) {
+                        c++;
+                    }
+
+                    if ( i>0 && arena[i - 1][j] == 2) {
+                        c++;
+                    }
+
+                    if (j>0 && arena[i][j - 1] == 2) {
+                        c++;
+                    }
+                }
+            }
+        }
+
+        if ( c*2 >=10){
+
+            System.out.println("Points Gained: "+ c*2 +". Your team has survived the game.");
+
+        }
+        else{
+
+            System.out.println("Points Gained: "+ c*2 +". Your team is out.");
+
+        }
+    }
+
+
+

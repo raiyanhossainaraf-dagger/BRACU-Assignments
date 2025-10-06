@@ -1,0 +1,307 @@
+								TASK 1
+
+
+    public static String checkSimilar( Node building1, Node building2 ){
+
+        //You're not suppose to create any new Linked List for this task
+
+        //TODO
+        Node current=building1;
+
+        Node current1=building2;
+
+        boolean found=false;
+        while (current1 != null && current!=null){
+
+            if(current.elem.equals(current1.elem)){
+
+                found=true;
+                current=current.next;
+                current1=current1.next;
+
+            }
+
+            else {
+
+                found=false;
+                break;
+
+            }
+
+        }
+            String result="";
+        if(current!=null || current1!=null){
+
+            result=" Not Similar";
+
+        }
+        else if (found==true){
+
+            result="Similar";
+
+        }
+        else {
+            result="Not Similar";
+        }
+
+        return result;
+    }
+
+
+								TASK 2
+
+
+    
+    
+    public static int sumDist(Node head, Integer[] distArr) {
+        // To Do
+
+        int sum = 0;
+        for (int i = 0; i < distArr.length; i++) {
+
+            int temp = distArr [i];
+            Node temp2=head ;
+          for (int j = 0; j < temp && temp2 !=null; j++) {
+
+              temp2 = temp2.next;
+
+          }
+          if (temp2 != null) {
+
+              sum = sum + (Integer) temp2.elem;
+          }
+
+        }
+        return sum;
+    }
+
+
+								TASK 3
+
+
+    public static Node alternateMerge( Node head1, Node head2 ){
+        
+        //You’re NOT ALLOWED to create a new singly linked list for this task
+
+        //TO DO
+        Node temp1 = head1;
+        Node temp2 = head2;
+        Node mergedH = head1;
+
+        while( temp1.next != null && temp2.next != null ){
+
+
+            Node t1Next =temp1.next;
+            Node t2Next =temp2.next;
+
+            temp1.next = temp2;
+            if (t1Next == null){
+
+                break;
+
+            }
+
+            temp2.next =t1Next ;
+
+            temp1 = t1Next;
+            temp2 = t2Next;
+
+        }
+
+        if(temp2!=null){
+
+            temp1.next = temp2;
+        }
+
+
+
+        //remove the following line when returning the Head of the modified LinkedList
+        return mergedH;
+    }
+
+
+
+`								TASK 4
+
+ public static Node idGenerator(Node head1, Node head2, Node head3) {
+        
+        //TO DO
+
+        Node current =head1 ;
+        Node next = null;
+        Node prev = null;
+        while(current!= null) {
+
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+
+
+
+        }
+       Node nHead = prev;
+
+        Node tail = nHead;
+        while(tail.next != null) {
+
+            tail = tail.next;
+        }
+
+        Node current2 = head2;
+         Node current1=head3;
+
+        while(current1 != null&& current2 != null) {
+
+           int temp  = (int)current1.elem+(int) current2.elem ;
+           if(temp>=10){
+
+               temp = temp%10;
+           }
+
+            Node newNode = new Node(temp);
+           tail.next = newNode;
+           tail = tail.next;
+           current1 = current1.next;
+           current2 = current2.next;
+
+        }
+
+
+        //Hint: the Node elements are actually Object, you can type cast them
+        //      into int or Integer like the following:
+        //        (int)n.elem  or  (Integer)n.elem
+
+        return nHead; // Remove this when you're ready to return the new head
+
+    }
+
+
+
+							TASK 5
+
+ public static void sumOddAppend(Node dh) {
+        // TO DO
+
+        Node temp = dh.next;
+        Node prev = dh;
+        int sum = 0;
+
+        while (temp.next != dh) {
+
+                int f = (int)temp.elem;
+                if (f%2 != 0) {
+
+                    sum += f;
+                    prev.next = temp.next;
+                    temp = temp.next;
+
+                }
+                else {
+                    prev = temp;
+                    temp = temp.next;
+                }
+
+
+
+
+        }
+        Node newNode = new Node(sum);
+        temp=dh;
+        while (temp.next != dh) {
+
+            temp=temp.next;
+
+        }
+
+        temp.next= newNode;
+        newNode.next = dh;
+
+    }
+
+							TASK 6
+
+
+public static void pairJoin(DNode dh1, DNode dh2) {
+        // TO DO
+
+        DNode current = dh1.next;
+        DNode c2 = dh2.next;
+
+        while (current != null && c2 != null) {
+
+            DNode temp = current.next;
+            DNode temp2 = c2.next;
+
+            current.next = c2;
+            c2.prev = current;
+
+            c2.next = temp;
+            if(temp!=null) {
+                temp.prev = c2;
+            }
+
+            current = temp;
+            c2 = temp2;
+
+        }
+
+        DNode tail = dh1.next;
+        while (tail.next !=null ) {
+
+            tail = tail.next;
+
+        }
+        tail.next = dh1;
+        dh1.prev = tail;
+
+    }
+
+
+							TASK 7
+
+ public static void rangeMove(DNode dh, int start, int end) {
+        // TO DO
+
+        DNode curr = dh.next;
+        DNode tail = dh.prev;
+
+
+        while(true) {
+
+            if(curr == dh){
+
+                break;
+            }
+
+            DNode next = curr.next;
+
+            if((int)curr.elem>=start && (int)curr.elem<=end) {
+
+
+                curr.prev.next=curr.next;
+                curr.next.prev=curr.prev;
+                
+                
+                dh.prev.next=curr;
+                curr.prev =dh.prev;
+                curr.next= dh;
+                dh.prev=curr;
+                
+
+            }
+
+            if(curr==tail){
+
+                break;
+
+            }
+
+            curr = next;
+
+
+        }
+
+    }
+
+
