@@ -1,0 +1,211 @@
+public class Song{
+
+String sn;
+String an;
+double l;
+Song loc;
+  
+public Song(String a,String b,double c){
+
+sn=a;
+an=b;
+l=c;
+loc=null;
+}
+
+public void songInfo(){
+
+System.out.println("Title: "+sn);
+  System.out.println("Artist: "+an);
+  System.out.println("Length: "+l);
+}
+
+}
+
+
+
+
+
+//task1
+public class Playlist{
+  
+  String name;
+  int c=0;
+  Song firstSong;
+  
+  
+  //task2
+  public Playlist(String a){
+    name=a;
+    System.out.println(name+"  created.");
+    
+  }
+  
+  
+  //task3&4
+  public void info(){
+    
+    System.out.println(name +" has the following songs:");
+    
+    if(firstSong==null){
+      System.out.println("No songs in "+name);
+    }
+    else{
+      Song nowp=firstSong;
+      c=1;
+      while(nowp!=null){
+        System.out.println("Song- "+c);
+        nowp.songInfo();
+        nowp=nowp.loc;
+        c++;
+      }
+    }
+  }
+  
+  public void addSong(Song a){
+    if(firstSong==null){
+      
+      firstSong=a;
+      
+      
+    }
+    else{
+      Song nowp=firstSong;
+      while(nowp.loc!=null){
+        
+        nowp=nowp.loc;
+      }
+      nowp.loc=a;
+    }
+    System.out.println(a.sn+" added to "+name);
+  }
+  
+  
+  //task5
+  public void addSong(Song a,int b){
+    if(b==0){
+      a.loc=firstSong;
+      firstSong=a;
+      System.out.println(a.sn+ " added to " + name + "." );
+      
+    }
+    else{
+    Song nowp=firstSong;
+    int cnt=0;
+    while(nowp!=null&&cnt<b-1){
+      nowp= nowp.loc;
+      cnt++;
+    }
+    if(nowp==null){
+      System.out.println("Cannot add song to Index " + b + ".");
+    }
+    else{
+      a.loc=nowp.loc;
+      nowp.loc=a;
+      System.out.println(a.sn + " added to " + name + ".");
+    }
+  }
+}
+  
+  
+  //task6
+ public void playSong(String a){
+  Song nowp=firstSong;
+  
+  while(nowp!=null){
+    if(nowp.sn.equals(a)){
+      
+      System.out.println("Playing "+nowp.sn+" by "+nowp.an+".");
+      return;
+    }
+    nowp = nowp.loc;
+  }
+  System.out.println(a+" not found in playlist " + name + ".");  
+ }
+ 
+ 
+ //task7
+ public void playSong(int x){
+   Song nowp=firstSong;
+  int cnt=0;
+  
+  while(nowp!=null){
+    
+    if(cnt==x){
+      System.out.println("Playing "+nowp.sn+" by "+nowp.an+ "." );
+      return;
+    }
+    
+    nowp = nowp.loc;
+    cnt++;
+  }
+  System.out.println("Song at Index "+x+" not found in "+name+ "." );
+ }
+ 
+ 
+ //task8
+  public void deleteSong(String a){
+  if(firstSong==null){
+    System.out.println(a + " not found in " + name + ".");
+  }
+  else if( firstSong.sn.equals(a)){
+    firstSong= firstSong.loc;
+    System.out.println(a + " deleted from " + name + ".");
+  }
+  else{
+    Song nowp=firstSong;
+    while(nowp.loc!=null&&!nowp.loc.sn.equals(a)){
+      nowp=nowp.loc;
+    }
+    if(nowp.loc==null){
+      System.out.println(a+" not found in "+ name +".");
+    }
+    else{
+      nowp.loc=nowp.loc.loc;
+      System.out.println(a +" deleted from "+name+".");
+    
+  }
+ }
+  }
+  
+  
+ //task9
+ public int totalSong(){
+   
+  Song nowp=firstSong; 
+  int cnt=0;
+  
+  while( nowp!=null ) {
+    
+    nowp=nowp.loc;
+    cnt++;
+  }
+  return cnt;
+ }
+ 
+ 
+ //task10
+ public void merge(Playlist second){
+  if( firstSong==null ){
+    
+    firstSong=second.firstSong;
+  }
+  else{
+    
+    Song nowp=firstSong;
+    
+    while(nowp.loc!=null){
+      
+      nowp=nowp.loc;
+    }
+    nowp.loc=second.firstSong;
+  }
+  System.out.println("Merge Completed!");
+ }
+
+}
+
+
+
+
+

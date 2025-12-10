@@ -1,0 +1,274 @@
+                                             task1
+import java.util.Scanner;
+public class task1{
+  public static void main (String[]args){
+    Scanner a = new Scanner(System.in);
+    System.out.println("Enter a String");
+    String s1 = a.nextLine();
+    int length=s1.length();
+    String s2="";
+      for(int j =0;j<length;j++){
+        
+        char c= s1.charAt(j);
+        
+        if( s1.charAt(j)>96&&s1.charAt(j)<123){
+          
+          c=(char)(c-32);  
+          s2+=c;
+        }
+        else{
+          
+        s2+=s1.charAt(j);
+        }
+        
+      }
+      
+      System.out.println(s2);
+    }
+    
+  }
+
+                                             task2
+import java.util.Scanner;
+public class task2{
+  public static void main (String[]args){
+    Scanner a = new Scanner(System.in);
+    System.out.println("Enter a String");
+    String s1 = a.nextLine();
+    int l= s1.length();
+    String s2 ="";
+    for(int i=l-1;i>=0;i--){
+      
+      s2+=s1.charAt(i);
+      
+    }
+    if(s1.equals(s2)){
+      System.out.println("true");
+    }
+    else{
+     System.out.println("false");
+    }
+  }
+}
+                                             task3
+import java.util.Scanner;
+public class task3{
+  public static void main (String[]args){
+    Scanner a = new Scanner(System.in);
+    System.out.println("Enter a String");
+    String s1 = a.nextLine();
+    System.out.println("Enter a split character"); 
+    String s2 = a.next();
+    int l = s1.length();
+    for(int i=0;i<l;i++){
+    
+      if(s1.charAt(i)==s2.charAt(0))
+      {
+      System.out.println();
+      }
+      else{
+      System.out.print(s1.charAt(i));
+      }
+    
+    }
+    
+  }
+}
+                                             task4
+import java.util.Scanner;
+public class task4{
+  public static void main (String[]args){
+    Scanner a = new Scanner(System.in);
+    System.out.println("Enter a String");
+    String s1 = a.nextLine();
+    int l= s1.length();
+    String s2 ="";
+    for(int i=l-1;i>=0;i--){
+      
+      s2+=s1.charAt(i);
+      
+    }
+    System.out.println(s2);
+  }
+}
+    
+                                             task5
+import java.util.Scanner;
+public class task5{
+  public static void main (String[]args){
+    Scanner a = new Scanner(System.in);
+    System.out.println("Enter The magic phrase:");
+    String s1 = a.nextLine();
+    int vc=0;
+    int cc=0;
+    int l=s1.length();
+    String s2="aeiouAEIOU";
+    for(int i =0;i<l;i++){
+      char c= s1.charAt(i);
+ if(c<='z'&&c>='A'){
+        if( s2.indexOf(c)!=-1){
+        vc+=1;
+        }
+       
+        else {
+          cc++;
+        }  
+    }
+    }
+    
+    if(vc!=0&&vc%3==0&&cc!=0&&cc%5==0){
+    System.out.println("Aaarr! Me Plunder!!");
+    }
+    else{
+    System.out.println("Blimey! No Plunder!!");
+    }
+  
+  }
+}
+
+                                             task6
+import java.util.Scanner;
+public class task6{
+  public static void main(String[]args) {
+    Scanner scanner=new Scanner(System.in);
+    System.out.println("Enter a string:");
+    String s1=scanner.nextLine() ;
+    String s2="";
+     String w1="";        
+    for(int i=s1.length()-1;i>=0;i--){
+       char c=s1.charAt(i);
+            
+         if(c==' '||i==0){
+              
+            if(i==0){
+                  
+              w1=s1.charAt(i)+w1;
+                }
+              s2=s2+w1; 
+                if(i!=0){
+                  
+                  s2=s2+" " ; 
+                }
+                
+                w1="";
+            } 
+                else {
+                  
+                   w1=c+w1;
+            }
+                
+        }
+        System.out.println(s2) ;
+    }
+  
+}
+
+                                             task7
+import java.util.Scanner;
+public class task7{
+  public static void main (String[]args){
+    Scanner a = new Scanner(System.in);
+    System.out.println("Enter a String");
+    String s1 = a.nextLine();
+    System.out.println("Enter second string"); 
+    String s2 = a.nextLine();
+    int l = s1.length();
+    int q = s2.length();
+    String s3="";
+    
+      for (int i = 0; i <l; i++) {
+        
+            char c = s1.charAt(i) ;
+            
+             if (s2.indexOf(c) == -1) {
+               
+                s3 += c; 
+            }
+        }
+
+        
+        for (int j= 0; j <q; j++) {
+          
+             char c = s2.charAt(j);
+            
+            
+              if (s1.indexOf(c) == -1) { 
+                
+                s3 += c;
+            }
+        }
+        String s4=s3.toUpperCase();
+    
+  System.out.println(s4);
+  }
+}
+  
+
+                                             task8
+import java.util.Scanner;
+public class task8{
+  public static void main(String[]args) {
+    Scanner scanner=new Scanner(System.in);
+    System.out.println("Enter a string:");
+    String s1=scanner.nextLine() ;
+    String s2="";
+    int count=0;
+    int l=s1.length();
+    for(int i=0;i<l;i++){
+      
+              char c=s1.charAt(i);
+              
+      if(s1.charAt(i)>=64&&s1.charAt(i)<=122){
+
+                if(count%2 == 0){
+                    s2+= Character.toLowerCase(c); 
+                } 
+                else{
+                    s2+= Character.toUpperCase(c); 
+                }
+                 count++; 
+            } 
+         else{
+                 s2+=c; 
+            }
+        }
+        System.out.println(s2);
+     
+    }  
+  }
+                                             task9
+import java.util.Scanner;
+public class task9{
+  public static void main(String[]args) {
+    Scanner scanner=new Scanner(System.in);
+    System.out.println("Enter a password:");
+    String s1=scanner.nextLine() ;   
+    int length=s1.length();
+    
+    boolean lc=false;     
+    boolean d=false;
+    boolean sc=false;
+     boolean uc=false ;
+    boolean l=length>=8;
+     for(int i=0;i<length;i++){
+      
+        char c=s1.charAt(i);
+      
+      if(c>=65&&c<=90){
+        uc=true;
+      } 
+        else  if(c>=97&&c<=122){
+        lc=true;
+      } 
+        else if(c>=48&&c<=57){
+        d= true ;
+      } 
+      else if((c>=32&&c<=47)||(c>=58&&c<=64)||(c>=91&&c<=96)||(c>=123&&c<=127)){
+        sc=true;
+      }
+    }
+    boolean s2=(uc&&sc&&d&&lc&&l) ;
+    System.out.println(s2);
+      
+  }
+}

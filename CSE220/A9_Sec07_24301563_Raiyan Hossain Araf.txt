@@ -1,0 +1,630 @@
+								   TASK 2
+
+
+import com.sun.javafx.geom.Edge;
+
+public class Main {
+    public static void main(String[] args) {
+
+        int v=7;
+
+        EdgeNode[] adjList = new EdgeNode[v];
+        int[][] adjList2 = new int[v][v];
+
+        addEdge(adjList,0,1,1);
+        addEdge(adjList,1,2,2);
+        addEdge(adjList,2,3,3);
+        addEdge(adjList,3,4,4);
+        addEdge(adjList,4,5,5);
+        addEdge(adjList,5,6,6);
+        addEdge(adjList,6,0,7);
+        addEdge(adjList,1,3,8);
+        addEdge(adjList,2,4,9);
+        addEdge(adjList,3,5,10);
+        addEdge(adjList,4,0,11);
+        addEdge(adjList,5,1,12);
+        addEdge(adjList,6,2,13);
+        addEdge(adjList,2,0,14);
+        addEdge(adjList,4,6,15);
+        addEdge(adjList,1,6,16);
+
+        addEdge(adjList2,0,1,1);
+        addEdge(adjList2,1,2,2);
+        addEdge(adjList2,2,3,3);
+        addEdge(adjList2,3,4,4);
+        addEdge(adjList2,4,5,5);
+        addEdge(adjList2,5,6,6);
+        addEdge(adjList2,6,0,7);
+        addEdge(adjList2,1,3,8);
+        addEdge(adjList2,2,4,9);
+        addEdge(adjList2,3,5,10);
+        addEdge(adjList2,4,0,11);
+        addEdge(adjList2,5,1,12);
+        addEdge(adjList2,6,2,13);
+        addEdge(adjList2,2,0,14);
+        addEdge(adjList2,4,6,15);
+        addEdge(adjList2,1,6,16);
+
+        GraphUtils.showAdjList(adjList);
+        int[] sum = new int[v];
+        sum = GraphUtils.findSumofEdges(adjList);
+
+        System.out.println("Maximum sum of edge weights(Adjacency List): "+GraphUtils.compare(sum));
+
+        int[] sum2 = new int[v];
+        sum2 = GraphUtils.findSumofEdges(adjList2);
+        System.out.println("Maximum sum of edge weights(Adjacency Matrix): "+GraphUtils.compare(sum2));
+    }
+
+    public static void addEdge(EdgeNode[] adjList, int from, int to, int weight){
+
+        insertingEdge(adjList,from,to,weight);
+        insertingEdge(adjList,to,from,weight);
+
+    }
+
+    public static void insertingEdge(EdgeNode[] adjList, int from, int to, int weight){
+
+      EdgeNode newNode = new EdgeNode(to,weight);
+
+      if(adjList[from]==null){
+
+          adjList[from] = newNode;
+          return;
+
+      }
+
+      EdgeNode tempNode = adjList[from];
+
+      while(tempNode.next!=null){
+          if (tempNode.toV==to&&tempNode.weight==weight){
+              return;
+
+          }
+
+          tempNode = tempNode.next;
+
+      }
+
+      if (tempNode.toV!=to||tempNode.weight!=weight){
+
+          tempNode.next = newNode;
+
+      }
+
+    }
+
+
+    public static void addEdge(int[][] adjList2, int from, int to, int weight){
+
+        adjList2[from][to]= weight;
+        adjList2[to][from]= weight;
+
+    }
+
+}
+
+class EdgeNode{
+
+    int toV;
+    int weight;
+    EdgeNode next;
+
+    public EdgeNode(int toV,int weight){
+
+        this.toV=toV;
+        this.weight=weight;
+        this.next=null;
+
+
+
+    }
+
+
+}
+
+class GraphUtils{
+
+    public static void printLL(EdgeNode head){
+
+        EdgeNode n =head;
+
+        while(n!=null){
+
+            System.out.print("-> ( "+n.toV+", "+n.weight+" )");
+            n=n.next;
+
+        }
+
+        System.out.println();
+
+    }
+
+    public static void appendLL(EdgeNode head, EdgeNode eNode){
+
+        EdgeNode n=head;
+        while(n.next!=null){
+
+            n=n.next;
+        }
+        n.next=eNode;
+
+    }
+
+    public static void showAdjList(EdgeNode[] adjList){
+
+        for(int i =0;i< adjList.length;i++){
+
+            System.out.print("Vertex "+ i +":");
+            printLL(adjList[i]);
+
+        }
+
+
+
+    }
+
+    public static int[] findSumofEdges(EdgeNode[] adjList){
+        int[] sum=new int[adjList.length];
+
+        for(int i =0;i< adjList.length;i++){
+            EdgeNode n=adjList[i];
+        while(n!=null) {
+            sum[i] += n.weight;
+            n = n.next;
+        }
+        }
+        return sum;
+    }
+
+    public static int[] findSumofEdges(int[][] adjList){
+        int[] sum=new int[adjList.length];
+
+        for (int i=0;i<adjList.length;i++){
+
+            for (int j =0;j< adjList[i].length;j++){
+
+                sum[i] += adjList[i][j];
+
+            }
+        }
+        return sum;
+    }
+    public static int compare(int[] sum){
+
+        int r=sum[0];
+        for(int i=0;i<sum.length;i++){
+
+        if(sum[i]>r){
+
+            r=sum[i];
+
+        }
+
+        }
+        return r;
+    }
+
+}
+
+
+							    TASK 3
+
+
+
+public class Main {
+    public static void main(String[] args) {
+
+        int v=7;
+
+        EdgeNode[] adjList = new EdgeNode[v];
+        int[][] adjList2 = new int[v][v];
+
+        addEdge(adjList,0,1,1);
+        addEdge(adjList,1,2,2);
+        addEdge(adjList,2,3,3);
+        addEdge(adjList,3,4,4);
+        addEdge(adjList,4,5,5);
+        addEdge(adjList,5,6,6);
+        addEdge(adjList,6,0,7);
+        addEdge(adjList,1,3,8);
+        addEdge(adjList,2,4,9);
+        addEdge(adjList,3,5,10);
+        addEdge(adjList,4,0,11);
+        addEdge(adjList,5,1,12);
+        addEdge(adjList,6,2,13);
+        addEdge(adjList,2,0,14);
+        addEdge(adjList,4,6,15);
+        addEdge(adjList,1,6,16);
+
+        addEdge(adjList2,0,1,1);
+        addEdge(adjList2,1,2,2);
+        addEdge(adjList2,2,3,3);
+        addEdge(adjList2,3,4,4);
+        addEdge(adjList2,4,5,5);
+        addEdge(adjList2,5,6,6);
+        addEdge(adjList2,6,0,7);
+        addEdge(adjList2,1,3,8);
+        addEdge(adjList2,2,4,9);
+        addEdge(adjList2,3,5,10);
+        addEdge(adjList2,4,0,11);
+        addEdge(adjList2,5,1,12);
+        addEdge(adjList2,6,2,13);
+        addEdge(adjList2,2,0,14);
+        addEdge(adjList2,4,6,15);
+        addEdge(adjList2,1,6,16);
+
+        GraphUtils.showAdjList(adjList);
+        int[] sum = new int[v];
+        sum = GraphUtils.findSumofEdges(adjList);
+        int[] res = new int[2];
+        res = GraphUtils.compare(sum);
+
+        System.out.println("Maximum sum of edge weights(Adjacency List): "+res[0]);
+        System.out.println("Max Vertex with highest weights(Adjacency List): "+res[1]);
+        int[] sum2 = new int[v];
+        sum2 = GraphUtils.findSumofEdges(adjList2);
+        int[] res2 = new int[2];
+        res2 = GraphUtils.compare(sum2);
+        System.out.println("Maximum sum of edge weights(Adjacency Matrix): "+res2[0]);
+        System.out.println("Max Vertex with highest weights(Adjacency Matrix): "+res2[1]);
+
+    }
+
+    public static void addEdge(EdgeNode[] adjList, int from, int to, int weight){
+        EdgeNode newNode = new EdgeNode(to,weight);
+        if (adjList[from]==null){
+
+            adjList[from]=newNode;
+
+        }
+
+        else {
+
+            GraphUtils.appendLL(adjList[from],newNode);
+
+        }
+
+
+
+    }
+
+    public static void addEdge(int[][] adjList2, int from, int to, int weight){
+
+        adjList2[from][to]= weight;
+
+    }
+
+}
+
+class EdgeNode{
+
+    int toV;
+    int weight;
+    EdgeNode next;
+
+    public EdgeNode(int toV,int weight){
+
+        this.toV=toV;
+        this.weight=weight;
+        this.next=null;
+
+
+
+    }
+
+
+}
+
+class GraphUtils{
+
+    public static void printLL(EdgeNode head){
+
+        EdgeNode n =head;
+
+        while(n!=null){
+
+            System.out.print("-> ( "+n.toV+", "+n.weight+" )");
+            n=n.next;
+
+        }
+
+        System.out.println();
+
+    }
+
+    public static void appendLL(EdgeNode head, EdgeNode eNode){
+
+        EdgeNode n=head;
+        while(n.next!=null){
+
+            n=n.next;
+        }
+        n.next=eNode;
+
+    }
+
+    public static void showAdjList(EdgeNode[] adjList){
+
+        for(int i =0;i< adjList.length;i++){
+
+            System.out.print("Vertex "+ i +":");
+            printLL(adjList[i]);
+
+        }
+
+
+
+    }
+
+    public static int[] findSumofEdges(EdgeNode[] adjList){
+        int[] sum=new int[adjList.length];
+
+        for(int i =0;i< adjList.length;i++){
+           EdgeNode n=adjList[i];
+
+           while(n!=null){
+
+               sum[i]+=n.weight;
+               n=n.next;
+
+           }
+        }
+
+        return sum;
+    }
+
+    public static int[] findSumofEdges(int[][] adjList){
+        int[] sum=new int[adjList.length];
+
+        for (int i=0;i<adjList.length;i++){
+
+            for (int j =0;j< adjList[i].length;j++){
+
+                sum[i] += adjList[i][j];
+
+            }
+        }
+        return sum;
+    }
+
+    public static int[] compare(int[] sum){
+
+        int r=0;
+        int v=0;
+        for(int i=0;i<sum.length;i++){
+
+            for(int j=i+1;j<sum.length;j++){
+
+                r=Math.max(sum[i],sum[j]);
+                if(sum[i]>=sum[j]){
+
+                    v= i;
+
+                }
+                else{
+
+                    v=j;
+
+                }
+            }
+
+        }
+        return new int[]{r,v};
+    }
+
+}
+
+
+
+						   		 TASK 4
+
+
+
+public class Main {
+    public static void main(String[] args) {
+
+        int v=7;
+
+        EdgeNode[] adjList = new EdgeNode[v];
+        int[][] adjList2 = new int[v][v];
+
+   	addEdge(adjList,0,1,1);
+        addEdge(adjList,1,2,2);
+        addEdge(adjList,2,3,3);
+        addEdge(adjList,3,4,4);
+        addEdge(adjList,4,5,5);
+        addEdge(adjList,5,6,6);
+        addEdge(adjList,6,0,7);
+        addEdge(adjList,1,3,8);
+        addEdge(adjList,2,4,9);
+        addEdge(adjList,3,5,10);
+        addEdge(adjList,4,0,11);
+        addEdge(adjList,5,1,12);
+        addEdge(adjList,6,2,13);
+        addEdge(adjList,2,0,14);
+        addEdge(adjList,4,6,15);
+        addEdge(adjList,1,6,16);
+
+        addEdge(adjList2,0,1,1);
+        addEdge(adjList2,1,2,2);
+        addEdge(adjList2,2,3,3);
+        addEdge(adjList2,3,4,4);
+        addEdge(adjList2,4,5,5);
+        addEdge(adjList2,5,6,6);
+        addEdge(adjList2,6,0,7);
+        addEdge(adjList2,1,3,8);
+        addEdge(adjList2,2,4,9);
+        addEdge(adjList2,3,5,10);
+        addEdge(adjList2,4,0,11);
+        addEdge(adjList2,5,1,12);
+        addEdge(adjList2,6,2,13);
+        addEdge(adjList2,2,0,14);
+        addEdge(adjList2,4,6,15);
+        addEdge(adjList2,1,6,16);
+
+        GraphUtils.showAdjList(adjList);
+       EdgeNode [] adjList3 = new EdgeNode[v];
+       adjList3=GraphUtils.convertToUndirected(adjList);
+       System.out.println("");
+        System.out.println("Converted AdjList:");
+        GraphUtils.showAdjList(adjList3);
+        System.out.println("");
+        GraphUtils.converterForUndirected(adjList2);
+        System.out.println("Converted AdjMatrix:");
+        for (int i = 0; i < v; i++) {
+
+            for (int j = 0; j < v; j++) {
+
+                System.out.print(adjList2[i][j]+" ");
+            }
+            System.out.println();
+        }
+
+    }
+
+    public static void addEdge(EdgeNode[] adjList, int from, int to, int weight){
+        EdgeNode newNode = new EdgeNode(to,weight);
+        if (adjList[from]==null){
+
+            adjList[from]=newNode;
+
+        }
+
+        else {
+
+            GraphUtils.appendLL(adjList[from],newNode);
+
+        }
+
+
+
+    }
+
+    public static void addEdge(int[][] adjList2, int from, int to, int weight){
+
+        adjList2[from][to]= weight;
+
+    }
+
+}
+
+class EdgeNode{
+
+    int toV;
+    int weight;
+    EdgeNode next;
+
+    public EdgeNode(int toV,int weight){
+
+        this.toV=toV;
+        this.weight=weight;
+        this.next=null;
+
+
+
+    }
+
+
+}
+
+class GraphUtils{
+
+    public static void printLL(EdgeNode head){
+
+        EdgeNode n =head;
+
+        while(n!=null){
+
+            System.out.print("-> ( "+n.toV+", "+n.weight+" )");
+            n=n.next;
+
+        }
+
+        System.out.println();
+
+    }
+
+    public static void appendLL(EdgeNode head, EdgeNode eNode){
+
+        EdgeNode n=head;
+        while(n.next!=null){
+
+            n=n.next;
+        }
+        n.next=eNode;
+
+    }
+
+    public static void showAdjList(EdgeNode[] adjList){
+
+        for(int i =0;i< adjList.length;i++){
+
+            System.out.print("Vertex "+ i +":");
+            printLL(adjList[i]);
+
+        }
+
+
+
+    }
+
+   public static EdgeNode[] convertToUndirected (EdgeNode[] adjList){
+
+        int n = adjList.length;
+        EdgeNode[] undirected = new EdgeNode[n];
+
+        for(int i =0;i< adjList.length;i++) {
+
+            EdgeNode v = adjList[i];
+
+            while(v!=null) {
+
+            convertHelper(undirected,i,v.toV,v.weight);
+            convertHelper(undirected,v.toV,i,v.weight);
+            v=v.next;
+
+            }
+
+        }
+
+        return undirected;
+   }
+
+   public static void convertHelper(EdgeNode[] adjList, int from, int to, int weight){
+
+       EdgeNode reverseNode= new EdgeNode(to,weight);
+
+       if (adjList[from]==null){
+
+           adjList[from]=reverseNode;
+
+       }
+       else {
+
+           GraphUtils.appendLL(adjList[from],reverseNode);
+       }
+
+   }
+
+   public static  int[][] converterForUndirected(int[][] adjList){
+
+        for(int i =0;i< adjList.length;i++){
+
+            for(int j=0;j<adjList.length;j++){
+
+                if (adjList[i][j]!=0) {
+
+                    adjList[j][i] = adjList[i][j];
+
+                }
+
+            }
+
+        }
+
+        return adjList;
+
+   }
+
+}

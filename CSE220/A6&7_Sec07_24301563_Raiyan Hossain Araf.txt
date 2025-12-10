@@ -1,0 +1,302 @@
+ 					LAB ASSIGNMENT 6
+ 					     TASK 4
+
+public class Task4 {
+
+    //===================================TASK#4===================================
+    // This method takes only 3 parameters
+    // 1st one is root of the given tree
+    // 2nd one is there to help you count the levels
+    // 3rd one is the level TILL whic you need to swap childs
+    // All the changes will happen in-place
+    // This method doesn't return anything
+    // You can use extra helper private static methods as per need
+    public static void swapChild( BTNode root, int lvl, int M ){
+        //TO DO
+
+
+        if(root == null){
+
+            return;
+        }
+
+        if(lvl<M){
+
+            BTNode temp = root.left;
+            root.left = root.right;
+            root.right = temp;
+
+            swapChild(root.left,lvl+1,M);
+            swapChild(root.right,lvl+1,M);
+
+        }
+
+    }
+    //============================================================================
+}
+
+ 					     TASK 5
+
+// Complete the subtractSummation method
+//ASSIGNMENT TASK MUST SUBMIT
+public class Task5 {
+
+    //===================================TASK#5===================================
+    // This method takes only 1 parameter which is root of the given tree
+    // This method returns an Integer
+    // At times you may need to typeCast root.elem to Integer
+    // You can use extra helper private static methods with extra extra params as per need
+    public static Integer subtractSummation( BTNode root ){
+        //TO DO
+        if( root == null ){
+
+            return 0;
+        }
+
+
+        int sumL = sumationSubTree(root.left);
+        int sumR = sumationSubTree(root.right);
+
+        return  sumL - sumR;
+    }
+
+    private static int sumationSubTree(BTNode node){
+
+        if(node == null){
+
+            return 0;
+
+        }
+
+        return (int)node.elem+sumationSubTree(node.left)+sumationSubTree(node.right);
+    }
+    //============================================================================
+
+}
+
+
+ 					     TASK 6
+
+// Complete the levelSum method
+//ASSIGNMENT TASK MUST SUBMIT
+public class Task6 {
+
+    //===================================TASK#6===================================
+    // This method takes only 1 parameter which is root of the given tree
+    // This method returns an Integer
+    // At times you may need to typeCast root.elem to Integer
+    // You can use extra helper private static methods with extra extra params as per need
+    public static Integer levelSum( BTNode root ){
+        //TO DO
+        int sum = 0;
+        int height = getHeight(root);
+
+        if( root == null ) {
+
+            return 0;
+
+        }
+
+        for(int lvl=0; lvl<height; lvl++) {
+
+            int levelSum = helper(root,lvl);
+
+            if (lvl % 2 == 0) {
+
+                sum -= levelSum;
+
+            }
+
+            else {
+
+                sum += levelSum;
+            }
+
+        }
+
+        return sum; //remove this line
+    }
+
+
+    private static int helper(BTNode root,int lvl) {
+
+        if (root == null) {
+
+            return 0;
+
+        }
+        if (lvl == 0) {
+
+            return (int) root.elem;
+
+        }
+
+        else {
+
+            return helper(root.left,lvl-1)+helper(root.right,lvl-1);
+
+        }
+
+    }
+
+    private static int getHeight(BTNode root) {
+
+        if (root == null) {
+
+            return 0;
+
+        }
+
+        return 1+Math.max(getHeight(root.left),getHeight(root.right));
+    }
+    //============================================================================
+
+}
+
+
+
+
+
+
+
+							**LAB ASSIGNMENT 7**
+
+
+
+								TASK 4
+
+//Assignment Task (must Submit)
+// Complete the rangeSum method
+public class Task4 {
+
+    //===================================TASK#4======================
+    // This method takes only three parameters
+    // first one is the root of the given tree
+    // second one the low range and third one is high range
+    // You can use extra helper private static methods as per need
+    public static Integer rangeSum( BSTNode root, Integer low, Integer high ){
+        //TO DO
+        Integer sum=0;
+
+        if(root==null){
+            return sum;
+        }
+
+        if(root.elem<=high && root.elem>=low){
+
+           sum+=root.elem;
+           sum+=rangeSum(root.left,low,high);
+           sum+=rangeSum(root.right,low,high);
+
+        }
+
+        else if(root.elem<low ){
+
+            sum+=rangeSum(root.right,low,high);
+        }
+        else{
+            sum+=rangeSum(root.left,low,high);
+        }
+
+        return sum; // remove this line
+    }
+    //===============================================================
+
+
+}
+
+ 
+
+								TASK 5
+//Assignment Task (must Submit)
+// Complete the sumOfLeaves method
+public class Task5 {
+
+    //===================================TASK#5======================
+    // This method takes only one parameter
+    // it is root of the given tree
+    // You can use extra helper private static methods as per need
+    public static Integer mirrorSum( BSTNode root ){
+        //TO DO
+        Integer sum = 0;
+        int c=0;
+        if( root == null ){
+
+            return sum;
+
+        }
+        if( root.left != null && root.right != null ) {
+
+
+            sum += helper(root.left, root.right);
+        }
+
+
+        return sum; // remove this line
+    }
+
+
+    private static Integer helper( BSTNode left, BSTNode right ){
+
+        if( left== null|| right == null ){
+
+            return 0;
+
+        }
+
+
+        int sum = left.elem + right.elem;
+
+        sum += helper(left.left,right.right);
+        sum += helper(left.right,right.left);
+
+        return sum;
+
+    }
+    //===============================================================
+
+
+}
+
+
+
+								TASK 6
+
+//Assignment Task (must Submit)
+// Complete the isBST method
+public class Task6 {
+
+    //===================================TASK#6======================
+    // This method takes only one parameter
+    // it is root of the given tree
+    // You can use extra helper private static methods as per need
+    public static Boolean isBST( BSTNode root ){
+        //TO DO
+
+        return helper(root, Integer.MIN_VALUE,Integer.MAX_VALUE);
+
+    }
+
+    private static boolean helper(BSTNode root,int m, int n){
+
+        if(root == null){
+
+            return true;
+
+        }
+
+        if(root.elem<=m|| root.elem>=n){
+
+            return false;
+
+        }
+
+
+        return helper(root.left,m,root.elem) &&helper(root.right,root.elem,n);
+
+    }
+    //===============================================================
+
+
+}
+
