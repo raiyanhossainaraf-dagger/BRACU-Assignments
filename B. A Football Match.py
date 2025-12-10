@@ -8,9 +8,9 @@ N,M=map(int,input().strip().split())
 adjList=[[] for _ in range(N + 1)]
 
 color=[0]*(N+1)
-group1_total=0
-group2_total=0
+group_total=0
 
+#creating the graph
 def addEdgetoMatrix(source,destination):
 
     adjList[source].append(destination)
@@ -23,7 +23,7 @@ for _ in range(M):
     addEdgetoMatrix(u,v)
 
 
-
+#using BFS to color the graph and partitioning
 for start in range(1,N+1):
 
     if color[start]==0: 
@@ -55,8 +55,8 @@ for start in range(1,N+1):
                     q.put(neighbor)
         
         
-        group1_total+=max(group1_count, group2_count)
+        group_total+=max(group1_count, group2_count)
 
 
 isolated = sum(1 for i in range(1,N+1) if color[i]==0)
-print(group1_total+isolated)
+print(group_total+isolated)
